@@ -54,17 +54,17 @@ def reset():
     b10 = Button(root, text="Reset", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b10))
 
     #Grid buttons unto screen
-    b1.grid(row=0,column=0)
-    b2.grid(row=0,column=1)
-    b3.grid(row=0,column=2)
+    b1.grid(row=0,column=0, sticky="nsew")
+    b2.grid(row=0,column=1, sticky="nsew")
+    b3.grid(row=0,column=2, sticky="nsew")
 
-    b4.grid(row=1,column=0)
-    b5.grid(row=1,column=1)
-    b6.grid(row=1,column=2)
+    b4.grid(row=1,column=0, sticky="nsew")
+    b5.grid(row=1,column=1, sticky="nsew")
+    b6.grid(row=1,column=2, sticky="nsew")
 
-    b7.grid(row=2,column=0)
-    b8.grid(row=2,column=1)
-    b9.grid(row=2,column=2)
+    b7.grid(row=2,column=0, sticky="nsew")
+    b8.grid(row=2,column=1, sticky="nsew")
+    b9.grid(row=2,column=2, sticky="nsew")
 
 def disableButtons():
     b1.config(state=DISABLED)
@@ -210,21 +210,21 @@ def checkIfTie():
     if count == 9 and winner == False:
         messagebox.showinfo("Tie!", "So Close!!!")
         disableButtons()        
-    #Diagonal
-    elif b1["text"] == "O" and b5["text"] == "O" and b9["text"] == "O":
-        b1.config(bg="red")
-        b5.config(bg="red")
-        b9.config(bg="red")
-        winner = True
-        messagebox.showinfo("O wins!", "Congratulations!!!")
-        disableButtons()
-    elif b3["text"] == "O" and b5["text"] == "O" and b7["text"] == "O":
-        b3.config(bg="red")
-        b5.config(bg="red")
-        b7.config(bg="red")
-        winner = True
-        messagebox.showinfo("O wins!", "Congratulations!!!")
-        disableButtons()
+    # #Diagonal
+    # elif b1["text"] == "O" and b5["text"] == "O" and b9["text"] == "O":
+    #     b1.config(bg="red")
+    #     b5.config(bg="red")
+    #     b9.config(bg="red")
+    #     winner = True
+    #     messagebox.showinfo("O wins!", "Congratulations!!!")
+    #     disableButtons()
+    # elif b3["text"] == "O" and b5["text"] == "O" and b7["text"] == "O":
+    #     b3.config(bg="red")
+    #     b5.config(bg="red")
+    #     b7.config(bg="red")
+    #     winner = True
+    #     messagebox.showinfo("O wins!", "Congratulations!!!")
+    #     disableButtons()
     
 #Button Clicked Function
 def b_click(b):
@@ -257,18 +257,26 @@ b8 = Button(root, text=" ", font=("Helvetica", 20), height= 3, width=6, bg="whit
 b9 = Button(root, text=" ", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b9))
 b10 = Button(root, text="Reset", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b10))
 
+Grid.rowconfigure(root, 0, weight= 1)
+Grid.rowconfigure(root, 1, weight= 1)
+Grid.rowconfigure(root, 2, weight= 1)
+
+Grid.columnconfigure(root, 0, weight= 1)
+Grid.columnconfigure(root, 1, weight= 1)
+Grid.columnconfigure(root, 2, weight= 1)
+
 #Grid buttons unto screen
-b1.grid(row=0,column=0)
-b2.grid(row=0,column=1)
-b3.grid(row=0,column=2)
+b1.grid(row=0,column=0, sticky="nsew")
+b2.grid(row=0,column=1, sticky="nsew")
+b3.grid(row=0,column=2, sticky="nsew")
 
-b4.grid(row=1,column=0)
-b5.grid(row=1,column=1)
-b6.grid(row=1,column=2)
+b4.grid(row=1,column=0, sticky="nsew")
+b5.grid(row=1,column=1, sticky="nsew")
+b6.grid(row=1,column=2, sticky="nsew")
 
-b7.grid(row=2,column=0)
-b8.grid(row=2,column=1)
-b9.grid(row=2,column=2)
+b7.grid(row=2,column=0, sticky="nsew")
+b8.grid(row=2,column=1, sticky="nsew")
+b9.grid(row=2,column=2, sticky="nsew")
 
 my_menu = Menu(root)
 root.config(menu=my_menu)
