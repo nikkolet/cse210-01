@@ -10,29 +10,62 @@ colorama.init(autoreset=True)
 #==========================================================================================
 
 def main():
+    print("Welcome to Tic Tac Toe!")
+    print()
+    print("The awesome classic game that allows you to customize your experience!")
+    print("What challenge level do you want? ")
+    print("1. Easy - 3 x 3 board")
+    print("2. Medium - 4 x 4 board")
+    print("3. Hard - 5 x 5 board")
+    print("4. Expert - 6 x 6 board")
+    print()
+    board_size = int(input("Please enter your level number(1-4): "))
     player = next_player("")
-    board = create_board()
-    while not (has_winner(board) or is_a_draw(board)):
-        display_board(board)
-        make_move(player, board)
-        player = next_player(player)
-    display_board(board)
+    board = create_board(board_size)
+    print(board)
+    # while not (has_winner(board) or is_a_draw(board)):
+    #     display_board(board)
+    #     make_move(player, board)
+
+    #     player = next_player(player)
+    # display_board(board)
     print("Good game. Thanks for playing!") 
 
-def create_board():
+def create_board(board_size):
     board = []
-    for square in range(9):
-        board.append(square + 1)
-    return board
+    if board_size == 1:
+        for square in range(9):
+            board3x3 = board.append(square + 1)
+        return board3x3
+    elif board_size == 2:
+        for square in range(16):
+            board.append(square + 1)
+        return board    
+    elif board_size == 3:
+        for square in range(25):
+            board.append(square + 1)
+        return board  
+    elif board_size == 4:
+        for square in range(36):
+            board.append(square + 1)
+        return board       
+    else:
+        print("Oop! You've entered an invalid value. Please try again!")
 
 def display_board(board):
-    print()
-    print(f"{board[0]}|{board[1]}|{board[2]}")
-    print('-+-+-')
-    print(f"{board[3]}|{board[4]}|{board[5]}")
-    print('-+-+-')
-    print(f"{board[6]}|{board[7]}|{board[8]}")
-    print()
+    # range3x3 = [1,2,3,4,5,6,7,8,9]
+    # range4x4 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
+    # range5x5 = [1,2,3,4,5,6,7,8,9]
+    # range6x6 = [1,2,3,4,5,6,7,8,9]
+    global board3x3
+    if board == board3x3:
+        print()
+        print(f"{board[0]}|{board[1]}|{board[2]}")
+        print('-+-+-')
+        print(f"{board[3]}|{board[4]}|{board[5]}")
+        print('-+-+-')
+        print(f"{board[6]}|{board[7]}|{board[8]}")
+        print()
     
 def is_a_draw(board):
     for square in range(9):
@@ -41,6 +74,8 @@ def is_a_draw(board):
     return True 
     
 def has_winner(board):
+
+
     return (board[0] == board[1] == board[2] or
             board[3] == board[4] == board[5] or
             board[6] == board[7] == board[8] or
