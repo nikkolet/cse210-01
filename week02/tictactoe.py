@@ -23,10 +23,10 @@ def main():
     player = next_player("")
     board = create_board(board_size)
     print(board)
-    while not (has_winner(board) or is_a_draw(board)):
-        display_board(board)
-        make_move(player, board)
-        player = next_player(player)
+    # while not (has_winner(board) or is_a_draw(board)):
+    #     display_board(board)
+    #     make_move(player, board)
+    #     player = next_player(player)
     display_board(board)
     print("Good game. Thanks for playing!") 
 
@@ -95,7 +95,21 @@ def display_board(board):
         print('└--------------┘')
         print()
     elif board == range6x6:
-        pass
+        print()
+        print('┌-----------------┐')
+        print(f"| {board[0]}| {board[1]}| {board[2]}| {board[3]}| {board[4]}| {board[5]}|")
+        print('|--+--+--+--+--+--|')
+        print(f"| {board[6]}| {board[7]}| {board[8]}|{board[9]}|{board[10]}|{board[11]}|")
+        print('|--+--+--+--+--+--|')
+        print(f"|{board[12]}|{board[13]}|{board[14]}|{board[15]}|{board[16]}|{board[17]}|")
+        print('|--+--+--+--+--+--|')
+        print(f"|{board[18]}|{board[19]}|{board[20]}|{board[21]}|{board[22]}|{board[23]}|")
+        print('|--+--+--+--+--+--|')
+        print(f"|{board[24]}|{board[25]}|{board[26]}|{board[27]}|{board[28]}|{board[29]}|")
+        print('|--+--+--+--+--+--|')
+        print(f"|{board[30]}|{board[31]}|{board[32]}|{board[33]}|{board[34]}|{board[35]}|")
+        print('└-----------------┘')
+        print()
     else:
         pass
     
