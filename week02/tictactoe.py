@@ -11,8 +11,6 @@
 from tkinter import *
 from tkinter import messagebox
 
-from numpy import roots
-
 #==========================================================================================
 clicked = True
 count = 0
