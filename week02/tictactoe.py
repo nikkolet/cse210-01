@@ -19,15 +19,13 @@ root.iconbitmap("week02\images\icons8_tic_tac_toe_32_7Os_icon.ico")
 root.title('Tic Tac Toe Game')
 
 def main():
-    # playerOptions = ["X", "O"]
-    # playerOne = []
-    # playerTwo = []
-    # choice = input("Do you want to be X or O? ").capitalize()
-    # if choice == "X":
-    #     playerOne = "X"
-    #     playerTwo = "O"
+
     print("Welcome to Tic Tac Toe!")
-   
+    print("X always goes first!")
+    print("")
+    xColor = input("What color do you want to be? ")
+    
+
     root.mainloop()
     reset()
 
@@ -241,7 +239,7 @@ def b_click(b):
         count += 1
         checkIfWon()
     else:
-        messagebox.showerror("Oops! Sorry this has already been selected! Try again!")
+        messagebox.showerror("Oops!","This has already been selected! \n\tTry again!")
 
 
 b1 = Button(root, text=" ", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b1))
