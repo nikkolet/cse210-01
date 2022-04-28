@@ -7,289 +7,305 @@
 # import colorama
 # from colorama import Fore, Back, Style
 # colorama.init(autoreset=True)
+
+from tkinter import *
+from tkinter import messagebox
+
 #==========================================================================================
+clicked = True
+count = 0
 
 def main():
-    player = next_player("")
-    board = create_board()
-    while not (has_winner(board) or is_a_draw(board)):
-        display_board(board)
-        make_move(player, board)
-        player = next_player(player)
-    display_board(board)
-    print("Good game. Thanks for playing!") 
+    root = Tk()
+    root.title('Tic Tac Toe Game')
 
-def create_board():
-    board = []
-    for square in range(9):
-        board.append(square + 1)
-    return board
+    b1 = Button(root, text=" ", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b1))
+    b2 = Button(root, text=" ", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b2))
+    b3 = Button(root, text=" ", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b3))
 
-def display_board(board):
-    print()
-    print(f"{board[0]}|{board[1]}|{board[2]}")
-    print('-+-+-')
-    print(f"{board[3]}|{board[4]}|{board[5]}")
-    print('-+-+-')
-    print(f"{board[6]}|{board[7]}|{board[8]}")
-    print()
+    b4 = Button(root, text=" ", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b4))
+    b5 = Button(root, text=" ", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b5))
+    b6 = Button(root, text=" ", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b6))
+
+    b7 = Button(root, text=" ", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b7))
+    b8 = Button(root, text=" ", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b8))
+    b9 = Button(root, text=" ", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b9))
+    b10 = Button(root, text="Reset", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b10))
+
+    #Grid buttons unto screen
+    b1.grid(row=0,column=0)
+    b2.grid(row=0,column=1)
+    b3.grid(row=0,column=2)
+
+    b4.grid(row=1,column=0)
+    b5.grid(row=1,column=1)
+    b6.grid(row=1,column=2)
+
+    b7.grid(row=2,column=0)
+    b8.grid(row=2,column=1)
+    b9.grid(row=2,column=2)
+
+    my_menu = Menu(root)
+    root.config(menu=my_menu)
+
+    #Create Menu
+    options_menu = Menu(my_menu, tearoff=False)
+    my_menu.add_cascade(label = "Options", menu=options_menu)
+    options_menu.add_command(label = "Reset Game", command=reset)
+
+    root.mainloop()
+#     reset(root)
+#     disableButtons()
+#     checkIfWon()
+#     checkIfTie()
+
+#     display(root)
+#root.geometry("1200x710")
+
+#X starts so true
+
+def reset(root):
+    global b1, b2 , b3, b4, b5, b6, b7, b8, b9
+    global clicked, count
+    clicked = True
+    count = 0
+
+    b1 = Button(root, text=" ", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b1))
+    b2 = Button(root, text=" ", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b2))
+    b3 = Button(root, text=" ", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b3))
+
+    b4 = Button(root, text=" ", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b4))
+    b5 = Button(root, text=" ", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b5))
+    b6 = Button(root, text=" ", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b6))
+
+    b7 = Button(root, text=" ", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b7))
+    b8 = Button(root, text=" ", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b8))
+    b9 = Button(root, text=" ", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b9))
+    b10 = Button(root, text="Reset", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b10))
+
+    #Grid buttons unto screen
+    b1.grid(row=0,column=0)
+    b2.grid(row=0,column=1)
+    b3.grid(row=0,column=2)
+
+    b4.grid(row=1,column=0)
+    b5.grid(row=1,column=1)
+    b6.grid(row=1,column=2)
+
+    b7.grid(row=2,column=0)
+    b8.grid(row=2,column=1)
+    b9.grid(row=2,column=2)
+
+def disableButtons():
+    b1.config(state=DISABLED)
+    b2.config(state=DISABLED)
+    b3.config(state=DISABLED)
+
+    b4.config(state=DISABLED)
+    b5.config(state=DISABLED)
+    b6.config(state=DISABLED)
+
+    b7.config(state=DISABLED)
+    b8.config(state=DISABLED)
+    b9.config(state=DISABLED)
+
+def checkIfWon():
+    global b1,b2,b3,b4,b5,b6,b7,b8,b9
+    global winner
+    winner = False
+    #Is X the winner?
+    #Row
+    if b1["text"] == "X" and b2["text"] == "X" and b3["text"] == "X":
+        b1.config(bg="red")
+        b2.config(bg="red")
+        b3.config(bg="red")
+        winner = True
+        messagebox.showinfo("X wins!", "Congratulations!!!")
+        disableButtons()
+    elif b4["text"] == "X" and b5["text"] == "X" and b6["text"] == "X":
+        b4.config(bg="red")
+        b5.config(bg="red")
+        b6.config(bg="red")
+        winner = True
+        messagebox.showinfo("X wins!", "Congratulations!!!")
+        disableButtons()
+    elif b7["text"] == "X" and b8["text"] == "X" and b9["text"] == "X":
+        b7.config(bg="red")
+        b8.config(bg="red")
+        b9.config(bg="red")
+        winner = True
+        messagebox.showinfo("X wins!", "Congratulations!!!")
+        disableButtons()
+    #Column
+    elif b1["text"] == "X" and b4["text"] == "X" and b7["text"] == "X":
+        b1.config(bg="red")
+        b4.config(bg="red")
+        b7.config(bg="red")
+        winner = True
+        messagebox.showinfo("X wins!", "Congratulations!!!")
+        disableButtons()
+    elif b2["text"] == "X" and b5["text"] == "X" and b8["text"] == "X":
+        b4.config(bg="red")
+        b5.config(bg="red")
+        b6.config(bg="red")
+        winner = True
+        messagebox.showinfo("X wins!", "Congratulations!!!")
+        disableButtons()
+    elif b3["text"] == "X" and b6["text"] == "X" and b9["text"] == "X":
+        b7.config(bg="red")
+        b8.config(bg="red")
+        b9.config(bg="red")
+        winner = True
+        messagebox.showinfo("X wins!", "Congratulations!!!")
+        disableButtons()
+    #Diagonal
+    elif b1["text"] == "X" and b5["text"] == "X" and b9["text"] == "X":
+        b1.config(bg="red")
+        b5.config(bg="red")
+        b9.config(bg="red")
+        winner = True
+        messagebox.showinfo("X wins!", "Congratulations!!!")
+        disableButtons()
+    elif b3["text"] == "X" and b5["text"] == "X" and b7["text"] == "X":
+        b3.config(bg="red")
+        b5.config(bg="red")
+        b7.config(bg="red")
+        winner = True
+        messagebox.showinfo("X wins!", "Congratulations!!!")
+        disableButtons()
+
+    # Is O the winner?
+    #Row
+    elif b1["text"] == "O" and b2["text"] == "O" and b3["text"] == "O":
+        b1.config(bg="red")
+        b2.config(bg="red")
+        b3.config(bg="red")
+        winner = True
+        messagebox.showinfo("O wins!", "Congratulations!!!")
+        disableButtons()
+    elif b4["text"] == "O" and b5["text"] == "O" and b6["text"] == "O":
+        b4.config(bg="red")
+        b5.config(bg="red")
+        b6.config(bg="red")
+        winner = True
+        messagebox.showinfo("O wins!", "Congratulations!!!")
+        disableButtons()
+    elif b7["text"] == "O" and b8["text"] == "O" and b9["text"] == "O":
+        b7.config(bg="red")
+        b8.config(bg="red")
+        b9.config(bg="red")
+        winner = True
+        messagebox.showinfo("O wins!", "Congratulations!!!")
+        disableButtons()
+    #Column
+    elif b1["text"] == "O" and b4["text"] == "O" and b7["text"] == "O":
+        b1.config(bg="red")
+        b4.config(bg="red")
+        b7.config(bg="red")
+        winner = True
+        messagebox.showinfo("O wins!", "Congratulations!!!")
+        disableButtons()
+    elif b2["text"] == "O" and b5["text"] == "O" and b8["text"] == "O":
+        b4.config(bg="red")
+        b5.config(bg="red")
+        b6.config(bg="red")
+        winner = True
+        messagebox.showinfo("O wins!", "Congratulations!!!")
+        disableButtons()
+    elif b3["text"] == "O" and b6["text"] == "O" and b9["text"] == "O":
+        b7.config(bg="red")
+        b8.config(bg="red")
+        b9.config(bg="red")
+        winner = True
+        messagebox.showinfo("O wins!", "Congratulations!!!")
+        disableButtons()
+    #Diagonals
+    elif b1["text"] == "O" and b5["text"] == "O" and b9["text"] == "O":
+        b1.config(bg="red")
+        b5.config(bg="red")
+        b9.config(bg="red")
+        winner = True
+        messagebox.showinfo("O wins!", "Congratulations!!!")
+        disableButtons()
+    elif b3["text"] == "O" and b5["text"] == "O" and b7["text"] == "O":
+        b3.config(bg="red")
+        b5.config(bg="red")
+        b7.config(bg="red")
+        winner = True
+        messagebox.showinfo("O wins!", "Congratulations!!!")
+        disableButtons()
     
-def is_a_draw(board):
-    for square in range(9):
-        if board[square] != "x" and board[square] != "o":
-            return False
-    return True 
+def checkIfTie():
+    if count == 9 and winner == False:
+        messagebox.showinfo("Tie!", "So Close!!!")
+        disableButtons()        
+    #Diagonal
+    elif b1["text"] == "O" and b5["text"] == "O" and b9["text"] == "O":
+        b1.config(bg="red")
+        b5.config(bg="red")
+        b9.config(bg="red")
+        winner = True
+        messagebox.showinfo("O wins!", "Congratulations!!!")
+        disableButtons()
+    elif b3["text"] == "O" and b5["text"] == "O" and b7["text"] == "O":
+        b3.config(bg="red")
+        b5.config(bg="red")
+        b7.config(bg="red")
+        winner = True
+        messagebox.showinfo("O wins!", "Congratulations!!!")
+        disableButtons()
     
-def has_winner(board):
-    return (board[0] == board[1] == board[2] or
-            board[3] == board[4] == board[5] or
-            board[6] == board[7] == board[8] or
-            board[0] == board[3] == board[6] or
-            board[1] == board[4] == board[7] or
-            board[2] == board[5] == board[8] or
-            board[0] == board[4] == board[8] or
-            board[2] == board[4] == board[6])
-
-def make_move(player, board):
-    square = int(input(f"{player}'s turn to choose a square (1-9): "))
-    board[square - 1] = player
-
-def next_player(current):
-    if current == "" or current == "o":
-        return "x"
-    elif current == "x":
-        return "o"
-
-if __name__ == "__main__":
-    main()
-
-# def main():
-#     print("Welcome to Tic Tac Toe!")
-#     print()
-#     print("The awesome classic game that allows you to customize your experience!")
-#     print("What challenge level do you want? ")
-#     print()
-#     print("1. Easy - 3 x 3 board")
-#     print("2. Medium - 4 x 4 board")
-#     print("3. Hard - 5 x 5 board")
-#     print("4. Expert - 6 x 6 board")
-#     print()
-#     board_size = int(input("Please enter your level number(1-4): "))
-#     player = next_player("")
-#     board = create_board(board_size)
-#     print(board)
-#     while not (has_winner(board) or is_a_draw(board)):
-#         display_board(board)
-#         make_move(player, board)
-#         player = next_player(player)
-#     display_board(board)
-#     print("Good game. Thanks for playing!") 
-
-# def create_board(board_size):
-#     # board = []
-#     if board_size == 1:
-#         board = []
-#         for square in range(9):
-#             board.append(square + 1)
-#         return board
-#     # elif board_size == 2:
-#     #     for square in range(16):
-#     #         board.append(square + 1)
-#     #     return board    
-#     # elif board_size == 3:
-#     #     for square in range(25):
-#     #         board.append(square + 1)
-#     #     return board  
-#     # elif board_size == 4:
-#     #     for square in range(36):
-#     #         board.append(square + 1)
-#     #     return board       
-#     else:
-#         print("Oop! You've entered an invalid value. Please try again!")
-
-# def display_board(board):
-#     range3x3 = [1,2,3,4,5,6,7,8,9]
-#     range4x4 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
-#     range5x5 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]
-#     range6x6 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]
-    
-    
-#     print()
-#     print('┌-----┐')
-#     print(f"|{board[0]}|{board[1]}|{board[2]}|")
-#     print('|-+-+-|')
-#     print(f"|{board[3]}|{board[4]}|{board[5]}|")
-#     print('|-+-+-|')
-#     print(f"|{board[6]}|{board[7]}|{board[8]}|")
-#     print('└-----┘')
-#     print()
-#     # elif board == range4x4:
-#     #     print()
-#     #     print('┌-----------┐')
-#     #     print(f"| {board[0]}| {board[1]}| {board[2]}| {board[3]}|")
-#     #     print('|--+--+--+--|')
-#     #     print(f"| {board[4]}| {board[5]}| {board[6]}| {board[7]}|")
-#     #     print('|--+--+--+--|')
-#     #     print(f"| {board[8]}|{board[9]}|{board[10]}|{board[11]}|")
-#     #     print('|--+--+--+--|')
-#     #     print(f"|{board[12]}|{board[13]}|{board[14]}|{board[15]}|")
-#     #     print('└-----------┘')
-#     #     print()
-      
-#     # elif board == range5x5:
-#     #     print()
-#     #     print('┌--------------┐')
-#     #     print(f"| {board[0]}| {board[1]}| {board[2]}| {board[3]}| {board[4]}|")
-#     #     print('|--+--+--+--+--|')
-#     #     print(f"| {board[5]}| {board[6]}| {board[7]}| {board[8]}|{board[9]}|")
-#     #     print('|--+--+--+--+--|')
-#     #     print(f"|{board[10]}|{board[11]}|{board[12]}|{board[13]}|{board[14]}|")
-#     #     print('|--+--+--+--+--|')
-#     #     print(f"|{board[15]}|{board[16]}|{board[17]}|{board[18]}|{board[19]}|")
-#     #     print('|--+--+--+--+--|')
-#     #     print(f"|{board[20]}|{board[21]}|{board[22]}|{board[23]}|{board[24]}|")
-#     #     print('└--------------┘')
-#     #     print()
-#     # elif board == range6x6:
-#     #     print()
-#     #     print('┌-----------------┐')
-#     #     print(f"| {board[0]}| {board[1]}| {board[2]}| {board[3]}| {board[4]}| {board[5]}|")
-#     #     print('|--+--+--+--+--+--|')
-#     #     print(f"| {board[6]}| {board[7]}| {board[8]}|{board[9]}|{board[10]}|{board[11]}|")
-#     #     print('|--+--+--+--+--+--|')
-#     #     print(f"|{board[12]}|{board[13]}|{board[14]}|{board[15]}|{board[16]}|{board[17]}|")
-#     #     print('|--+--+--+--+--+--|')
-#     #     print(f"|{board[18]}|{board[19]}|{board[20]}|{board[21]}|{board[22]}|{board[23]}|")
-#     #     print('|--+--+--+--+--+--|')
-#     #     print(f"|{board[24]}|{board[25]}|{board[26]}|{board[27]}|{board[28]}|{board[29]}|")
-#     #     print('|--+--+--+--+--+--|')
-#     #     print(f"|{board[30]}|{board[31]}|{board[32]}|{board[33]}|{board[34]}|{board[35]}|")
-#     #     print('└-----------------┘')
-#     #     print()
-    
-    
-# def is_a_draw(board):
-#     range3x3 = [1,2,3,4,5,6,7,8,9]
-#     range4x4 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
-#     range5x5 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]
-#     range6x6 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]
-
-    
-#     for square in range(9)  :
-#         if board[square] != "x" and board[square] != "o":
-#             return False
-#         return True 
-#     # elif board == range4x4:
-#     #     for square in range(16):
-#     #         if board[square] != "x" and board[square] != "o":
-#     #             return False
-#     #     return True 
-#     # elif board == range5x5:
-#     #     for square in range(25):
-#     #         if board[square] != "x" and board[square] != "o":
-#     #             return False
-#     #     return True 
-#     # elif board == range6x6:
-#     #     for square in range(36):
-#     #         if board[square] != "x" and board[square] != "o":
-#     #             return False
-#     #     return True 
+#Button Clicked Function
+def b_click(b):
+    global clicked, count
+    if b["text"] == " " and clicked == True:
+        b["text"] = "X"
+        clicked = False
+        count += 1
+        checkIfWon()
+    elif b["text"] == " " and clicked == False:
+        b["text"] = "O"
+        clicked = True
+        count += 1
+        checkIfWon()
+    else:
+        messagebox.showerror("Oops! Sorry this has already been selected! Try again!")
 
 
-# def has_winner(board):
-#     range3x3 = [1,2,3,4,5,6,7,8,9]
-#     range4x4 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
-#     range5x5 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]
-#     range6x6 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]
+# b1 = Button(root, text=" ", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b1))
+# b2 = Button(root, text=" ", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b2))
+# b3 = Button(root, text=" ", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b3))
 
-#     if board == range3x3:
-#                 #Row
-#         return (board[0] == board[1] == board[2] or
-#                 board[3] == board[4] == board[5] or
-#                 board[6] == board[7] == board[8] or
-#                 #Column
-#                 board[0] == board[3] == board[6] or
-#                 board[1] == board[4] == board[7] or
-#                 board[2] == board[5] == board[8] or
-#                 #Diagonal
-#                 board[0] == board[4] == board[8] or
-#                 board[2] == board[4] == board[6])
+# b4 = Button(root, text=" ", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b4))
+# b5 = Button(root, text=" ", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b5))
+# b6 = Button(root, text=" ", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b6))
 
-#     # elif board == range4x4:
-#     #             #Row
-#     #     return (board[0] == board[1] == board[2] == board[3] or
-#     #             board[4] == board[5] == board[6] == board[7]or
-#     #             board[8] == board[9] == board[10] == board[11]or
-#     #             board[12] == board[13] == board[14] == board[15]or
-#     #             #Column
-#     #             board[0] == board[4] == board[8] == board[12] or
-#     #             board[1] == board[5] == board[9] == board[13] or
-#     #             board[2] == board[6] == board[10] == board[14] or
-#     #             board[3] == board[7] == board[11] == board[15]or
-#     #             #Diagonal
-#     #             board[0] == board[5] == board[10] == board[15]or
-#     #             board[3] == board[6] == board[9] == board[12])
+# b7 = Button(root, text=" ", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b7))
+# b8 = Button(root, text=" ", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b8))
+# b9 = Button(root, text=" ", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b9))
+# b10 = Button(root, text="Reset", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b10))
 
-#     # elif board == range5x5:
-#     #             #Row
-#     #     return (board[0] == board[1] == board[2] == board[3] == board[4] or
-#     #             board[5] == board[6] == board[7] == board[8] == board[9] or
-#     #             board[10] == board[11] == board[12] == board[13] == board[14] or
-#     #             board[15] == board[16] == board[17] == board[18] == board[19] or
-#     #             board[20] == board[21] == board[22] == board[23] == board[24] or
-#     #             #Column
-#     #             board[0] == board[5] == board[10] == board[15] == board[20] or
-#     #             board[1] == board[6] == board[11] == board[16] == board[21] or
-#     #             board[2] == board[7] == board[12] == board[17] == board[22] or
-#     #             board[3] == board[8] == board[13] == board[18] == board[23]or
-#     #             board[4] == board[9] == board[14] == board[19] == board[24] or
-#     #             #Diagonal
-#     #             board[0] == board[6] == board[12] == board[18] == board[24]or
-#     #             board[4] == board[8] == board[12] == board[16] == board[20])
-        
-#     # elif board == range6x6:
-#     #             #Row
-#     #     return (board[0] == board[1] == board[2] == board[3] == board[4] == board[5]or
-#     #             board[6] == board[7] == board[8] == board[9] == board[10] == board[11]or
-#     #             board[12] == board[13] == board[14] == board[15] == board[16] == board[17] or
-#     #             board[18] == board[19] == board[20] == board[21] == board[22] == board[23] or
-#     #             board[23] == board[24] == board[25] == board[26] == board[27] == board[28] or
-#     #             board[29] == board[30] == board[31] == board[32] == board[33] == board[34] or
-#     #             #Column
-#     #             board[0] == board[6] == board[12] == board[18] == board[24] == board[30]or
-#     #             board[1] == board[7] == board[13] == board[19] == board[25] == board[31]or
-#     #             board[2] == board[8] == board[14] == board[20] == board[26] == board[32]or
-#     #             board[3] == board[9] == board[15] == board[21] == board[27] == board[33] or
-#     #             board[4] == board[10] == board[16] == board[22] == board[28] == board[34]or
-#     #             board[5] == board[11] == board[17] == board[23] == board[29] == board[35] or
-#     #             #Diagonal
-#     #             board[0] == board[6] == board[12] == board[18] == board[24] == board[35] or
-#     #             board[5] == board[9] == board[13] == board[17] == board[21] == board[25])
+# #Grid buttons unto screen
+# b1.grid(row=0,column=0)
+# b2.grid(row=0,column=1)
+# b3.grid(row=0,column=2)
 
-# def make_move(player, board):
-#     range3x3 = [1,2,3,4,5,6,7,8,9]
-#     range4x4 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
-#     range5x5 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]
-#     range6x6 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]
+# b4.grid(row=1,column=0)
+# b5.grid(row=1,column=1)
+# b6.grid(row=1,column=2)
 
-#     if board == range3x3:
-#         square = int(input(f"{player}'s turn to choose a square (1-9): "))
-#         board[square - 1] = player
-#     # elif board == range4x4:
-#     #     square = int(input(f"{player}'s turn to choose a square (1-16): "))
-#     #     board[square - 1] = player
-#     # elif board == range5x5:
-#     #     square = int(input(f"{player}'s turn to choose a square (1-25): "))
-#     #     board[square - 1] = player
-#     # elif board == range6x6:
-#     #     square = int(input(f"{player}'s turn to choose a square (1-36): "))
-#     #     board[square - 1] = player
+# b7.grid(row=2,column=0)
+# b8.grid(row=2,column=1)
+# b9.grid(row=2,column=2)
 
-# def next_player(current):
-#     if current == "" or current == "o":
-#         return "x"
-#     elif current == "x":
-#         return "o"
+# my_menu = Menu(root)
+# root.config(menu=my_menu)
 
-# if __name__ == "__main__":
-#     main()
+# #Create Menu
+# options_menu = Menu(my_menu, tearoff=False)
+# my_menu.add_cascade(label = "Options", menu=options_menu)
+# options_menu.add_command(label = "Reset Game", command=reset)
+
+# root.mainloop()
+
+main()
