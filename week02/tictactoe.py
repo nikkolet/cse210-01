@@ -23,20 +23,19 @@ def main():
     player = next_player("")
     board = create_board(board_size)
     print(board)
-    # while not (has_winner(board) or is_a_draw(board)):
-    #     display_board(board)
-    #     make_move(player, board)
-
-    #     player = next_player(player)
-    # display_board(board)
+    while not (has_winner(board) or is_a_draw(board)):
+        display_board(board)
+        make_move(player, board)
+        player = next_player(player)
+    display_board(board)
     print("Good game. Thanks for playing!") 
 
 def create_board(board_size):
     board = []
     if board_size == 1:
         for square in range(9):
-            board3x3 = board.append(square + 1)
-        return board3x3
+            board.append(square + 1)
+        return board
     elif board_size == 2:
         for square in range(16):
             board.append(square + 1)
@@ -53,19 +52,52 @@ def create_board(board_size):
         print("Oop! You've entered an invalid value. Please try again!")
 
 def display_board(board):
-    # range3x3 = [1,2,3,4,5,6,7,8,9]
-    # range4x4 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
-    # range5x5 = [1,2,3,4,5,6,7,8,9]
-    # range6x6 = [1,2,3,4,5,6,7,8,9]
-    global board3x3
-    if board == board3x3:
+    range3x3 = [1,2,3,4,5,6,7,8,9]
+    range4x4 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
+    range5x5 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]
+    range6x6 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]
+    
+    if board == range3x3:
         print()
-        print(f"{board[0]}|{board[1]}|{board[2]}")
-        print('-+-+-')
-        print(f"{board[3]}|{board[4]}|{board[5]}")
-        print('-+-+-')
-        print(f"{board[6]}|{board[7]}|{board[8]}")
+        print('┌-----┐')
+        print(f"|{board[0]}|{board[1]}|{board[2]}|")
+        print('|-+-+-|')
+        print(f"|{board[3]}|{board[4]}|{board[5]}|")
+        print('|-+-+-|')
+        print(f"|{board[6]}|{board[7]}|{board[8]}|")
+        print('└-----┘')
         print()
+    elif board == range4x4:
+        print()
+        print('┌-----------┐')
+        print(f"| {board[0]}| {board[1]}| {board[2]}| {board[3]}|")
+        print('|--+--+--+--|')
+        print(f"| {board[4]}| {board[5]}| {board[6]}| {board[7]}|")
+        print('|--+--+--+--|')
+        print(f"| {board[8]}|{board[9]}|{board[10]}|{board[11]}|")
+        print('|--+--+--+--|')
+        print(f"|{board[12]}|{board[13]}|{board[14]}|{board[15]}|")
+        print('└-----------┘')
+        print()
+      
+    elif board == range5x5:
+        print()
+        print('┌--------------┐')
+        print(f"| {board[0]}| {board[1]}| {board[2]}| {board[3]}| {board[4]}|")
+        print('|--+--+--+--+--|')
+        print(f"| {board[5]}| {board[6]}| {board[7]}| {board[8]}|{board[9]}|")
+        print('|--+--+--+--+--|')
+        print(f"|{board[10]}|{board[11]}|{board[12]}|{board[13]}|{board[14]}|")
+        print('|--+--+--+--+--|')
+        print(f"|{board[15]}|{board[16]}|{board[17]}|{board[18]}|{board[19]}|")
+        print('|--+--+--+--+--|')
+        print(f"|{board[20]}|{board[21]}|{board[22]}|{board[23]}|{board[24]}|")
+        print('└--------------┘')
+        print()
+    elif board == range6x6:
+        pass
+    else:
+        pass
     
 def is_a_draw(board):
     for square in range(9):
