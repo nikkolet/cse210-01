@@ -14,6 +14,7 @@ def main():
     print()
     print("The awesome classic game that allows you to customize your experience!")
     print("What challenge level do you want? ")
+    print()
     print("1. Easy - 3 x 3 board")
     print("2. Medium - 4 x 4 board")
     print("3. Hard - 5 x 5 board")
@@ -23,10 +24,10 @@ def main():
     player = next_player("")
     board = create_board(board_size)
     print(board)
-    # while not (has_winner(board) or is_a_draw(board)):
-    #     display_board(board)
-    #     make_move(player, board)
-    #     player = next_player(player)
+    while not (has_winner(board) or is_a_draw(board)):
+        display_board(board)
+        make_move(player, board)
+        player = next_player(player)
     display_board(board)
     print("Good game. Thanks for playing!") 
 
@@ -120,20 +121,40 @@ def is_a_draw(board):
     return True 
     
 def has_winner(board):
+    range3x3 = [1,2,3,4,5,6,7,8,9]
+    range4x4 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
+    range5x5 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]
+    range6x6 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]
 
+    if board == range3x3:
 
-    return (board[0] == board[1] == board[2] or
-            board[3] == board[4] == board[5] or
-            board[6] == board[7] == board[8] or
-            board[0] == board[3] == board[6] or
-            board[1] == board[4] == board[7] or
-            board[2] == board[5] == board[8] or
-            board[0] == board[4] == board[8] or
-            board[2] == board[4] == board[6])
+        return (board[0] == board[1] == board[2] or
+                board[3] == board[4] == board[5] or
+                board[6] == board[7] == board[8] or
+                board[0] == board[3] == board[6] or
+                board[1] == board[4] == board[7] or
+                board[2] == board[5] == board[8] or
+                board[0] == board[4] == board[8] or
+                board[2] == board[4] == board[6])
 
 def make_move(player, board):
-    square = int(input(f"{player}'s turn to choose a square (1-9): "))
-    board[square - 1] = player
+    range3x3 = [1,2,3,4,5,6,7,8,9]
+    range4x4 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
+    range5x5 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]
+    range6x6 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]
+
+    if board == range3x3:
+        square = int(input(f"{player}'s turn to choose a square (1-9): "))
+        board[square - 1] = player
+    elif board == range4x4:
+        square = int(input(f"{player}'s turn to choose a square (1-16): "))
+        board[square - 1] = player
+    elif board == range4x4:
+        square = int(input(f"{player}'s turn to choose a square (1-25): "))
+        board[square - 1] = player
+    elif board == range4x4:
+        square = int(input(f"{player}'s turn to choose a square (1-36): "))
+        board[square - 1] = player
 
 def next_player(current):
     if current == "" or current == "o":
