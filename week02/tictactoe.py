@@ -15,12 +15,23 @@ from tkinter import messagebox
 clicked = True
 count = 0
 root = Tk()
+root.iconbitmap("week02\images\icons8_tic_tac_toe_32_7Os_icon.ico")
 root.title('Tic Tac Toe Game')
 
 def main():
+    # playerOptions = ["X", "O"]
+    # playerOne = []
+    # playerTwo = []
+    # choice = input("Do you want to be X or O? ").capitalize()
+    # if choice == "X":
+    #     playerOne = "X"
+    #     playerTwo = "O"
+    print("Welcome to Tic Tac Toe!")
    
     root.mainloop()
     reset()
+
+
 
 def reset():
     global root
@@ -195,6 +206,7 @@ def checkIfWon():
         disableButtons()
     
 def checkIfTie():
+    global count
     if count == 9 and winner == False:
         messagebox.showinfo("Tie!", "So Close!!!")
         disableButtons()        
@@ -221,6 +233,7 @@ def b_click(b):
         b["text"] = "X"
         clicked = False
         count += 1
+
         checkIfWon()
     elif b["text"] == " " and clicked == False:
         b["text"] = "O"
