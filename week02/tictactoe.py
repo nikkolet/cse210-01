@@ -148,15 +148,68 @@ def has_winner(board):
     range6x6 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]
 
     if board == range3x3:
-
+                #Row
         return (board[0] == board[1] == board[2] or
                 board[3] == board[4] == board[5] or
                 board[6] == board[7] == board[8] or
+                #Column
                 board[0] == board[3] == board[6] or
                 board[1] == board[4] == board[7] or
                 board[2] == board[5] == board[8] or
+                #Diagonal
                 board[0] == board[4] == board[8] or
                 board[2] == board[4] == board[6])
+
+    elif board == range4x4:
+                #Row
+        return (board[0] == board[1] == board[2] == board[3] or
+                board[4] == board[5] == board[6] == board[7]or
+                board[8] == board[9] == board[10] == board[11]or
+                board[12] == board[13] == board[14] == board[15]or
+                #Column
+                board[0] == board[4] == board[8] == board[12] or
+                board[1] == board[5] == board[9] == board[13] or
+                board[2] == board[6] == board[10] == board[14] or
+                board[3] == board[7] == board[11] == board[15]or
+                #Diagonal
+                board[0] == board[5] == board[10] == board[15]or
+                board[3] == board[6] == board[9] == board[12])
+
+    elif board == range5x5:
+                #Row
+        return (board[0] == board[1] == board[2] == board[3] == board[4] or
+                board[5] == board[6] == board[7] == board[8] == board[9] or
+                board[10] == board[11] == board[12] == board[13] == board[14] or
+                board[15] == board[16] == board[17] == board[18] == board[19] or
+                board[20] == board[21] == board[22] == board[23] == board[24] or
+                #Column
+                board[0] == board[5] == board[10] == board[15] == board[20] or
+                board[1] == board[6] == board[11] == board[16] == board[21] or
+                board[2] == board[7] == board[12] == board[17] == board[22] or
+                board[3] == board[8] == board[13] == board[18] == board[23]or
+                board[4] == board[9] == board[14] == board[19] == board[24] or
+                #Diagonal
+                board[0] == board[6] == board[12] == board[18] == board[24]or
+                board[4] == board[8] == board[12] == board[16] == board[20])
+        
+    elif board == range6x6:
+                #Row
+        return (board[0] == board[1] == board[2] == board[3] == board[4] == board[5]or
+                board[6] == board[7] == board[8] == board[9] == board[10] == board[11]or
+                board[12] == board[13] == board[14] == board[15] == board[16] == board[17] or
+                board[18] == board[19] == board[20] == board[21] == board[22] == board[23] or
+                board[23] == board[24] == board[25] == board[26] == board[27] == board[28] or
+                board[29] == board[30] == board[31] == board[32] == board[33] == board[34] or
+                #Column
+                board[0] == board[6] == board[12] == board[18] == board[24] == board[30]or
+                board[1] == board[7] == board[13] == board[19] == board[25] == board[31]or
+                board[2] == board[8] == board[14] == board[20] == board[26] == board[32]or
+                board[3] == board[9] == board[15] == board[21] == board[27] == board[33] or
+                board[4] == board[10] == board[16] == board[22] == board[28] == board[34]or
+                board[5] == board[11] == board[17] == board[23] == board[29] == board[35] or
+                #Diagonal
+                board[0] == board[6] == board[12] == board[18] == board[24] == board[35] or
+                board[5] == board[9] == board[13] == board[17] == board[21] == board[25])
 
 def make_move(player, board):
     range3x3 = [1,2,3,4,5,6,7,8,9]
@@ -170,10 +223,10 @@ def make_move(player, board):
     elif board == range4x4:
         square = int(input(f"{player}'s turn to choose a square (1-16): "))
         board[square - 1] = player
-    elif board == range4x4:
+    elif board == range5x5:
         square = int(input(f"{player}'s turn to choose a square (1-25): "))
         board[square - 1] = player
-    elif board == range4x4:
+    elif board == range6x6:
         square = int(input(f"{player}'s turn to choose a square (1-36): "))
         board[square - 1] = player
 
