@@ -21,15 +21,6 @@ def main():
    
     root.mainloop()
     reset()
-#     reset(root)
-#     disableButtons()
-#     checkIfWon()
-#     checkIfTie()
-
-#     display(root)
-#root.geometry("1200x710")
-
-#X starts so true
 
 def reset():
     global root
@@ -273,7 +264,6 @@ root.config(menu=my_menu)
 options_menu = Menu(my_menu, tearoff=False)
 my_menu.add_cascade(label = "Options", menu=options_menu)
 options_menu.add_command(label = "Reset Game", command=reset)
-
 # root.mainloop()
 
 main()
