@@ -115,10 +115,31 @@ def display_board(board):
         pass
     
 def is_a_draw(board):
-    for square in range(9):
-        if board[square] != "x" and board[square] != "o":
-            return False
-    return True 
+    range3x3 = [1,2,3,4,5,6,7,8,9]
+    range4x4 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
+    range5x5 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]
+    range6x6 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]
+
+    if board == range3x3:
+        for square in range(9):
+            if board[square] != "x" and board[square] != "o":
+                return False
+        return True 
+    elif board == range4x4:
+        for square in range(16):
+            if board[square] != "x" and board[square] != "o":
+                return False
+        return True 
+    elif board == range5x5:
+        for square in range(25):
+            if board[square] != "x" and board[square] != "o":
+                return False
+        return True 
+    elif board == range6x6:
+        for square in range(36):
+            if board[square] != "x" and board[square] != "o":
+                return False
+        return True 
     
 def has_winner(board):
     range3x3 = [1,2,3,4,5,6,7,8,9]
