@@ -19,14 +19,15 @@ root.iconbitmap("week02\images\icons8_tic_tac_toe_32_7Os_icon.ico")
 root.title('Tic Tac Toe Game')
 
 def main():
-
+    global b1,b2,b3,b4,b5,b6,b7,b8,b9
     print("Welcome to Tic Tac Toe!")
     print("X always goes first!")
-    print("")
-    xColor = input("What color do you want to be? ")
-    
+    print("Then O will go next!")
 
+   
+   
     root.mainloop()
+    
     reset()
 
 
@@ -202,29 +203,20 @@ def checkIfWon():
         winner = True
         messagebox.showinfo("O wins!", "Congratulations!!!")
         disableButtons()
-    
-def checkIfTie():
-    global count
-    if count == 9 and winner == False:
+    elif count == 9 and winner == False:
+        b1.config(bg="red")
+        b2.config(bg="red")
+        b3.config(bg="red")
+        b4.config(bg="red")
+        b5.config(bg="red")
+        b6.config(bg="red")
+        b7.config(bg="red")
+        b8.config(bg="red")
+        b9.config(bg="red")
         messagebox.showinfo("Tie!", "So Close!!!")
-        disableButtons()        
-    # #Diagonal
-    # elif b1["text"] == "O" and b5["text"] == "O" and b9["text"] == "O":
-    #     b1.config(bg="red")
-    #     b5.config(bg="red")
-    #     b9.config(bg="red")
-    #     winner = True
-    #     messagebox.showinfo("O wins!", "Congratulations!!!")
-    #     disableButtons()
-    # elif b3["text"] == "O" and b5["text"] == "O" and b7["text"] == "O":
-    #     b3.config(bg="red")
-    #     b5.config(bg="red")
-    #     b7.config(bg="red")
-    #     winner = True
-    #     messagebox.showinfo("O wins!", "Congratulations!!!")
-    #     disableButtons()
-    
-#Button Clicked Function
+        disableButtons() 
+       
+
 def b_click(b):
     global clicked, count
     if b["text"] == " " and clicked == True:
@@ -241,7 +233,7 @@ def b_click(b):
     else:
         messagebox.showerror("Oops!","This has already been selected! \n\tTry again!")
 
-
+ 
 b1 = Button(root, text=" ", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b1))
 b2 = Button(root, text=" ", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b2))
 b3 = Button(root, text=" ", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b3))
@@ -254,6 +246,9 @@ b7 = Button(root, text=" ", font=("Helvetica", 20), height= 3, width=6, bg="whit
 b8 = Button(root, text=" ", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b8))
 b9 = Button(root, text=" ", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b9))
 b10 = Button(root, text="Reset", font=("Helvetica", 20), height= 3, width=6, bg="white", command= lambda: b_click(b10))
+
+
+    
 
 Grid.rowconfigure(root, 0, weight= 1)
 Grid.rowconfigure(root, 1, weight= 1)
@@ -276,13 +271,15 @@ b7.grid(row=2,column=0, sticky="nsew")
 b8.grid(row=2,column=1, sticky="nsew")
 b9.grid(row=2,column=2, sticky="nsew")
 
-my_menu = Menu(root)
-root.config(menu=my_menu)
 
-#Create Menu
-options_menu = Menu(my_menu, tearoff=False)
-my_menu.add_cascade(label = "Options", menu=options_menu)
-options_menu.add_command(label = "Reset Game", command=reset)
+def menu():
+    my_menu = Menu(root)
+    root.config(menu=my_menu)
+
+    #Create Menu
+    options_menu = Menu(my_menu, tearoff=False)
+    my_menu.add_cascade(label = "Options", menu=options_menu)
+    options_menu.add_command(label = "Reset Game", command=reset)
 # root.mainloop()
 
 main()
