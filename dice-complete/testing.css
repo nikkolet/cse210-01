@@ -1,0 +1,7 @@
+Class Selectors .highlight {
+    background-color: rgba(255, 242, 0, 0.4);
+}
+
+.active {
+    text-decoration: overline;
+}
